@@ -18,6 +18,6 @@ export class AppComponent {
   }
 
   getHelloString() {
-    this.response$ = this.httpClient.get<any>(environment.apiUrl).pipe(map(s => s.name));
+    this.response$ = this.httpClient.get<any>('/api').pipe(map(s => s.name));
   }
 }
