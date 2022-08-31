@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,6 @@ export class AppComponent {
   }
 
   getHelloString() {
-    this.response$ = this.httpClient.get<any>('/api').pipe(map(s => s.name));
+    this.response$ = this.httpClient.get<any>(environment.apiUrl).pipe(map(s => s.name));
   }
 }
