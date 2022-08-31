@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-app';
+  response$: Observable<any> | undefined
+  constructor(
+    private httpClient: HttpClient
+  ) {
+    this.getHelloString();
+  }
+
+  getHelloString() {
+    this.response$ = this.httpClient.get<any>('/api').pipe(map(s => s.name));
+  }
 }
