@@ -2,3 +2,4 @@
 **/obj/
 .github
 .vscode
+./node_modules
