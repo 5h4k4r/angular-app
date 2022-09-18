@@ -1,0 +1,24 @@
+resources:
+  - ../../base
+patchesJson6902:
+  - target:
+      group: extensions
+      version: v1
+      kind: Ingress
+      name: angular
+    path: ingress-patch.yaml
+commonLabels:
+  app: prod-angular
+namespace: dev
+replicas:
+  - name: angular
+    count: 3
+images:
+  - name: angular
+    newTag: 6b654da03c0e
+namePrefix: prod-
+configMapGenerator:
+  - name: angular
+    behavior: merge
+    literals:
+      - ENV=prod

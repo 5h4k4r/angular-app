@@ -1,0 +1,17 @@
+resources:
+  - ../../base
+patchesJson6902:
+  - target:
+      group: extensions
+      version: v1
+      kind: Ingress
+      name: angular
+    path: ingress-patch.yaml
+commonLabels:
+  app: dev-angular
+namespace: dev
+configMapGenerator:
+  - name: angular
+    behavior: merge
+    literals:
+      - ENV=dev

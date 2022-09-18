@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: angular
+  labels:
+    name: angular
+spec:
+  rules:
+    - host: shakar.tech
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: angular
+                port:
+                  name: http-app

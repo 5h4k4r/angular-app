@@ -1,0 +1,17 @@
+resources:
+  - ../../base
+patchesJson6902:
+  - target:
+      group: extensions
+      version: v1
+      kind: Ingress
+      name: angular
+    path: ingress-patch.yaml
+commonLabels:
+  app: staging-angular
+namespace: staging
+configMapGenerator:
+  - name: angular
+    behavior: merge
+    literals:
+      - ENV=staging
