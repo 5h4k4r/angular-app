@@ -38,6 +38,6 @@ jobs:
     needs: push-to-docker
     with:
       image: $GITHUB_SHA
-      environment: dev
+      env_name: dev
     secrets:
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
