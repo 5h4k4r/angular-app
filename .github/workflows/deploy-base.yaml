@@ -11,7 +11,7 @@ on:
         required: true
 
     secrets:
-      github_token:
+      githubToken:
         required: true
 
 jobs:
@@ -48,4 +48,4 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.githubToken }}
