@@ -8,7 +8,7 @@ on:
       - "*.md"
       - ".vscode/**"
 concurrency:
-  group: deploy-prod
+  group: deploy-main
   cancel-in-progress: true
 
 jobs:
@@ -35,7 +35,9 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/angular-k8s:${{ github.ref_name }}
   deploy:
     uses: 5h4k4r/angular-app/.github/workflows/deploy-base.yaml@main
-    needs: build-push
+    needs: push-to-docker
     with:
       image: $GITHUB_SHA
-      environment: prod
+      env_name: prod
+    secrets:
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}

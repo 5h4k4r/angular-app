@@ -35,7 +35,9 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/angular-k8s:${{ github.ref_name }}
   deploy:
     uses: 5h4k4r/angular-app/.github/workflows/deploy-base.yaml@dev
-    needs: build-push
+    needs: push-to-docker
     with:
       image: $GITHUB_SHA
-      environment: dev
+      env_name: dev
+    secrets:
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
