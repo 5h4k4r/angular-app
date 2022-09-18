@@ -9,11 +9,6 @@ on:
       environment:
         type: string
         required: true
-
-    secrets:
-      githubToken:
-        required: true
-
 jobs:
   deploy:
     name: Deploy
@@ -48,4 +43,4 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.githubToken }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
