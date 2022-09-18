@@ -10,10 +10,6 @@ on:
         type: string
         required: true
 
-    secrets:
-      GITHUB_TOKEN:
-        required: true
-
 jobs:
   deploy:
     name: Deploy

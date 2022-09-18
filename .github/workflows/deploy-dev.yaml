@@ -39,5 +39,3 @@ jobs:
     with:
       image: $GITHUB_SHA
       environment: dev
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
