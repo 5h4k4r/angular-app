@@ -1,17 +1,23 @@
 resources:
-  - ../../base
+- ../../base
 patchesJson6902:
-  - path: ingress-patch.yaml
-    target:
-      group: extensions
-      kind: Ingress
-      name: angular
-      version: v1
+- path: ingress-patch.yaml
+  target:
+    group: extensions
+    kind: Ingress
+    name: angular
+    version: v1
 commonLabels:
   app: dev-angular
 namespace: dev
 configMapGenerator:
-  - behavior: merge
-    literals:
-      - ENV=dev
-    name: angular
+- behavior: merge
+  literals:
+  - ENV=dev
+  name: angular
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: angular-k8s
+  newName: 5h4k4r/angular-k8s
+  newTag: c3efcdf2e30733778e6ecfaf27834c9815faa04e
