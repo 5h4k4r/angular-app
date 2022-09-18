@@ -9,6 +9,11 @@ on:
       environment:
         type: string
         required: true
+
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+
 jobs:
   deploy:
     name: Deploy
@@ -33,3 +38,14 @@ jobs:
           kustomize edit set image angular-k8s=$DOCKER_USERNAME/angular-k8s:${{ inputs.image }}
           kustomize build .
           cat kustomization.yaml
+
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Bump docker tag"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
