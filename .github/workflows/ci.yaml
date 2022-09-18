@@ -49,7 +49,7 @@ jobs:
         run: |
           cd kubernetes/overlays/dev
           kustomize edit set image angular-k8s=$DOCKER_USERNAME/angular-k8s:$GITHUB_SHA
-          kustomize ./
+          kustomize build .
           cat kustomization.yaml
 
       - name: Commit files
