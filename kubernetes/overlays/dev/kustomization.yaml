@@ -15,3 +15,9 @@ configMapGenerator:
     literals:
       - ENV=dev
     name: angular
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+  - name: angular-k8s
+    newName: 5h4k4r/angular-k8s
+    newTag: cee6727a6c65e3fd629a866c65e7735977d4b581
