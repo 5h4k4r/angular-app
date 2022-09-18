@@ -42,7 +42,7 @@ jobs:
           kustomize-version: "4.4.1"
 
       - name: Edit kustomization file
-        working-directory: kubernetes/base
+        working-directory: kubernetes/overlays/dev
         run: kustomize edit set image IMAGE="${{ inputs.image }}"
 
       - name: Deploy
