@@ -14,7 +14,7 @@ spec:
       containers:
         - name: angular
           imagePullPolicy: Always
-          image: angular-k8s:latest
+          image: 5h4k4r/angular-k8s:latest
           resources:
             limits:
               memory: "128Mi"
