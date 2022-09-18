@@ -8,7 +8,7 @@ on:
       - "*.md"
       - ".vscode/**"
 concurrency:
-  group: deploy-prod
+  group: deploy-main
   cancel-in-progress: true
 
 jobs:
@@ -38,4 +38,6 @@ jobs:
     needs: push-to-docker
     with:
       image: $GITHUB_SHA
-      environment: prod
+      env_name: prod
+    secrets:
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
