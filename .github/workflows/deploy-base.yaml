@@ -46,7 +46,7 @@ jobs:
         run: kustomize edit set image IMAGE="${{ inputs.image }}"
 
       - name: Deploy
-        working-directory: kubernetes/${{ inputs.env_name }}
+        working-directory: kubernetes/overlays/${{ inputs.env_name }}
         run: |-
 
           kustomize build | kubectl apply -f -
