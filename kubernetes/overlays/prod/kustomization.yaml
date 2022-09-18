@@ -1,12 +1,10 @@
 resources:
   - ../../base
-patchesJson6902:
-  - target:
-      group: extensions
-      version: v1
+patches:
+  - path: ingress-patch.yaml
+    target:
       kind: Ingress
       name: angular
-    path: ingress-patch.yaml
 commonLabels:
   app: prod-angular
 namespace: dev
