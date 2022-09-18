@@ -7,7 +7,7 @@ patches:
       name: angular
 commonLabels:
   app: prod-angular
-namespace: dev
+namespace: prod
 replicas:
   - name: angular
     count: 3
