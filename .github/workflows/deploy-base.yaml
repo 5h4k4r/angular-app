@@ -1,4 +1,4 @@
-name: Publish Docker image
+name: Deploy
 
 on:
   workflow_call:
@@ -6,41 +6,48 @@ on:
       image:
         type: string
         required: true
-      environment:
+      env_name:
         type: string
         required: true
+
+    secrets:
+      KUBECONFIG:
+        required: true
+
+env:
+  NAMESPACE: dit-docs
+
 jobs:
   deploy:
-    name: Deploy
+    timeout-minutes: 10
     runs-on: ubuntu-latest
-    steps:
-      - name: Print the environment - image
-        run: echo ${{ inputs.environment }} - ${{ inputs.image }}
+    environment:
+      name: ${{ inputs.env_name }}
 
-      - name: Check out code
+    steps:
+      - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Kubectl tool installer
+        uses: Azure/setup-kubectl@v3
+
+      - uses: azure/k8s-set-context@v2
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
 
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v1
         with:
-          kustomize-version: "4.2.0"
+          kustomize-version: "4.4.1"
 
-      - name: Update Kubernetes resources
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        run: |
-          cd kubernetes/overlays/${{ inputs.environment }}
-          kustomize edit set image angular-k8s=$DOCKER_USERNAME/angular-k8s:${{ inputs.image }}
-          kustomize build .
-          cat kustomization.yaml
+      - name: Edit kustomization file
+        working-directory: kubernetes/base
+        run: kustomize edit set image IMAGE="${{ inputs.image }}"
 
-      - name: Commit files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -am "Bump docker tag"
+      - name: Deploy
+        working-directory: kubernetes/${{ inputs.env_name }}
+        run: |-
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          kustomize build | kubectl apply -f -
+          kubectl rollout -n "$NAMESPACE" status deployment/angular -w --timeout=3m
