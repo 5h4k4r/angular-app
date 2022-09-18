@@ -47,7 +47,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          cd kustomize/base
+          cd kubernetes/overlays/dev
           kustomize edit set image angular-k8s=$DOCKER_USERNAME/angular-k8s:$GITHUB_SHA
           cat kustomization.yaml
 
