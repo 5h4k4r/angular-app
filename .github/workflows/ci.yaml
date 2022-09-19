@@ -64,15 +64,17 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git pull
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/5h4k4r
+          git checkout main
           git commit -am "Bump docker tag"
+          git push
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
-          force: true
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: main
+      #     force: true
       # - name: Notify argocd
       #   uses: clowdhaus/argo-cd-action/@main
       #   env:
