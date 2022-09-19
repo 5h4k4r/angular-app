@@ -1,22 +1,21 @@
 name: Publish Docker image
 
 on:
-  workflow_call:
-    inputs:
-      image:
-        type: string
-        required: true
-      environment:
-        type: string
-        required: true
+  push:
+    branches:
+      - dev
+    paths-ignore:
+      - "*.md"
+      - ".vscode/**"
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Print the environment - image
-        run: echo ${{ inputs.environment }} - ${{ inputs.image }}
-
       - name: Check out code
         uses: actions/checkout@v2
 
@@ -29,8 +28,8 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          cd kubernetes/overlays/${{ inputs.environment }}
-          kustomize edit set image angular-k8s=$DOCKER_USERNAME/angular-k8s:${{ inputs.image }}
+          cd kubernetes/overlays/${{ inputs.ref_name }}
+          kustomize edit set image angular-k8s=$DOCKER_USERNAME/angular-k8s:${{ github.ref_name }}
           kustomize build .
           cat kustomization.yaml
 
