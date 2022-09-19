@@ -3,13 +3,10 @@ name: Publish Docker image
 on:
   push:
     branches:
-      - dev
+      - main
     paths-ignore:
       - "*.md"
-      - ".vscode/**"
-concurrency:
-  group: deploy-${{ github.ref_name }}
-  cancel-in-progress: true
+
 jobs:
   push-to-docker:
     name: Push Docker image to Docker Hub
