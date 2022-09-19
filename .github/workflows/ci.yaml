@@ -64,7 +64,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/angular-cd
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/5h4k4r/angular-cd
           git checkout main
           git commit -am "Bump docker tag"
           git push
