@@ -56,7 +56,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          cd kubernetes/base
+          cd kubernetes/overlays/dev
           kustomize build
           cat kustomization.yaml
 
