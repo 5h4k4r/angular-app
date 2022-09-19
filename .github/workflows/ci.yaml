@@ -56,17 +56,17 @@ jobs:
           kustomize edit set image angular-k8s=$DOCKER_USERNAME/angular-k8s:$GITHUB_SHA
           cat kustomization.yaml
 
-      - name: Commit files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -am "Bump docker tag"
+      # - name: Commit files
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git commit -am "Bump docker tag"
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
 
       # - name: Notify argocd
       #   uses: clowdhaus/argo-cd-action/@main
@@ -74,7 +74,7 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   with:
       #     version: 2.4.11
-      #     command: app create angular-dev --repo https://github.com/5h4k4r/angular-app --path kubernetes/overlays/dev --dest-namespace dev --dest-server https://kubernetes.default.svc --kustomize-image 5h4k4r/angular-k8s:$${{ github.ref_name }} --server argocd.shakar.tech
+      #     command: app create angular-dev --insecure --repo https://github.com/5h4k4r/angular-app --path kubernetes/overlays/dev --dest-namespace dev --dest-server https://kubernetes.default.svc --kustomize-image 5h4k4r/angular-k8s:$${{ github.ref_name }} --server argocd.shakar.tech
 
       # - uses: actions/checkout@v2
       # - name: Sync ArgoCD Application
