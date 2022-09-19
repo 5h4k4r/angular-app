@@ -1,0 +1,46 @@
+# name: Publish Docker image
+
+# on:
+#   workflow_call:
+#     inputs:
+#       image:
+#         type: string
+#         required: true
+#       environment:
+#         type: string
+#         required: true
+# jobs:
+#   deploy:
+#     name: Deploy
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Print the environment - image
+#         run: echo ${{ inputs.environment }} - ${{ inputs.image }}
+
+#       - name: Check out code
+#         uses: actions/checkout@v2
+
+#       - name: Setup Kustomize
+#         uses: imranismail/setup-kustomize@v1
+#         with:
+#           kustomize-version: "4.2.0"
+
+#       - name: Update Kubernetes resources
+#         env:
+#           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+#         run: |
+#           cd kubernetes/overlays/${{ inputs.environment }}
+#           kustomize edit set image angular-k8s=$DOCKER_USERNAME/angular-k8s:${{ inputs.image }}
+#           kustomize build .
+#           cat kustomization.yaml
+
+#       - name: Commit files
+#         run: |
+#           git config --local user.email "action@github.com"
+#           git config --local user.name "GitHub Action"
+#           git commit -am "Bump docker tag"
+
+#       - name: Push changes
+#         uses: ad-m/github-push-action@master
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
