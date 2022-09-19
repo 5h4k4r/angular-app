@@ -33,6 +33,7 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/angular-k8s:latest
             ${{ secrets.DOCKER_USERNAME }}/angular-k8s:${{ github.sha }}
             ${{ secrets.DOCKER_USERNAME }}/angular-k8s:${{ github.ref_name }}
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
