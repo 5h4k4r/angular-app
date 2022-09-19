@@ -50,7 +50,7 @@ jobs:
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v1
         with:
-          kustomize-version: "3.6.1"
+          kustomize-version: "4.2.0"
 
       - name: Update Kubernetes resources
         env:
