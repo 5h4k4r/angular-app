@@ -44,7 +44,7 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: 5h4k4r/angular-cd
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.PAT }}
           ref: main
 
       - name: Setup Kustomize
