@@ -10,7 +10,7 @@ commonLabels:
 namespace: prod
 replicas:
   - name: angular
-    count: 3
+    count: 2
 images:
   - name: angular
     newTag: 6b654da03c0e
