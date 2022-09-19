@@ -45,6 +45,7 @@ jobs:
         with:
           repository: 5h4k4r/angular-cd
           token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
 
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v1
