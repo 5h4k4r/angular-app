@@ -75,4 +75,3 @@ jobs:
         with:
           version: 2.4.11
           command: app create kustomize-guestbook --repo https://github.com/5h4k4r/angular-app --path kustomize-guestbook --dest-namespace dev --dest-server https://kubernetes.default.svc --kustomize-image 5h4k4r/angular-k8s:$${{ github.ref_name }}
-          options: --client
