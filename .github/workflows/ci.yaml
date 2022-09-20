@@ -22,13 +22,13 @@ jobs:
       - name: Set env env_name
         run: |
           if [[ $BRANCH == 'main' ]]; then
-              echo "prod" >> "$GITHUB_ENV"
+              echo "env_name=prod" >> "$GITHUB_ENV"
           else
-              echo "dev" >> "$GITHUB_ENV"
+              echo "env_name=dev" >> "$GITHUB_ENV"
           fi
 
       - name: Echo environment
-        run: echo $GITHUB_ENV
+        run: echo $env_name
 
   #     - name: Check out the repo
   #       uses: actions/checkout@v3
