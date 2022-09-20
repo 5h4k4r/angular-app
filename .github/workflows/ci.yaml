@@ -22,9 +22,9 @@ jobs:
       - name: Set env env_name
         run: |
           if [[ $BRANCH == 'main' ]]; then
-              echo "env_name=prod" >> "$GITHUB_ENV"
+              echo "env_name=prod"
           else
-              echo "env_name=dev" >> "$GITHUB_ENV"
+              echo "env_name=dev"
           fi
 
       - name: Echo environment
