@@ -2,6 +2,10 @@ name: Push Docker image and update kustomize
 
 on:
   push:
+    branches:
+      - "main"
+      - "staging"
+      - "dev"
     paths-ignore:
       - "*.md"
       - ".vscode/**"
