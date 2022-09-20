@@ -28,7 +28,7 @@ jobs:
           fi
 
       - name: Echo environment
-        run: echo $GITHUB_ENV
+        run: echo $env_name
 
   #     - name: Check out the repo
   #       uses: actions/checkout@v3
