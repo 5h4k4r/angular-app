@@ -46,7 +46,7 @@ jobs:
           tags: |-
             ${{ secrets.DOCKER_USERNAME }}/angular-k8s:latest
             ${{ secrets.DOCKER_USERNAME }}/angular-k8s:${{ github.sha }}
-            ${{ secrets.DOCKER_USERNAME }}/angular-k8s:$env_name
+            ${{ secrets.DOCKER_USERNAME }}/angular-k8s:${{ env_name }}
 
   deploy:
     name: Deploy
