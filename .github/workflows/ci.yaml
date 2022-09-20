@@ -41,14 +41,12 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
-        env:
-          env_name: $env_name
         with:
           push: true
           tags: |-
             ${{ secrets.DOCKER_USERNAME }}/angular-k8s:latest
             ${{ secrets.DOCKER_USERNAME }}/angular-k8s:${{ github.sha }}
-            ${{ secrets.DOCKER_USERNAME }}/angular-k8s:$env_name
+            ${{ secrets.DOCKER_USERNAME }}/angular-k8s:${{ env.env_name }}
 
   deploy:
     name: Deploy
