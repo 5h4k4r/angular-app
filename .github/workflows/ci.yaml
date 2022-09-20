@@ -54,6 +54,20 @@ jobs:
     needs: push-to-docker
 
     steps:
+      - name: Set env BRANCH
+        run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> "$GITHUB_ENV"
+
+      - name: Set env env_name
+        run: |
+          if [[ $BRANCH == 'main' ]]; then
+              echo "env_name=prod" >> "$GITHUB_ENV"
+          else
+              echo env_name=$BRANCH >> "$GITHUB_ENV"
+          fi
+
+      - name: Echo environment
+        run: echo $env_name
+
       - name: Check out my other private repo
         uses: actions/checkout@master
         with:
