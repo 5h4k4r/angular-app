@@ -88,15 +88,17 @@ jobs:
         run: |
           echo $env_name
           cd kubernetes/overlays/$env_name
-          kustomize edit set image $DOCKER_USERNAME/angular-k8s=$DOCKER_USERNAME/angular-k8s:$GITHUB_SHA
+          kustomize edit set image $DOCKER_USERNAME/angular-k8s=DOCKER_USERNAME/angular-k8s:$GITHUB_SHA
           kustomize build
           cat kustomization.yaml
 
       - name: Commit files
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/5h4k4r/angular-cd
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/DOCKER_USERNAME/angular-cd
           git checkout main
           git commit -am "Bump docker tag"
           git push

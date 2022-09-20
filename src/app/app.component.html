@@ -1,2 +1,10 @@
-<h1>{{ response$ | async}} </h1>
-Nothing
+This array is from server
+<br>
+------------------
+<div *ngFor="let item of (response$ | async)?.items; let index = index">
+
+  <h1>{{ index }} {{ item.title }}</h1>
+  <h5> {{ item.description }}</h5>
+</div>
+
+--------------
