@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PostsService } from './backend/services';
+import { ListPostsDto } from './backend/models';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +12,14 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent {
   title = 'angular-app';
-  response$: Observable<any> | undefined
+  response$: Observable<ListPostsDto> | undefined
   constructor(
-    private httpClient: HttpClient
+    private postsService: PostsService,
   ) {
     this.getHelloString();
   }
 
   getHelloString() {
-    this.response$ = this.httpClient.get<any>('/api').pipe(map(s => s.name));
+    this.response$ = this.postsService.appControllerListPosts()
   }
 }
